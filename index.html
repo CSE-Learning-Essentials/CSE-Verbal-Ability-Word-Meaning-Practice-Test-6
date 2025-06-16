@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Civil Service Exam Practice Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .choices li {
+      list-style: none;
+      margin: 5px 0;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .correct-answer {
+      color: green;
+      font-weight: bold;
+    }
+    .social-link {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    .social-link a {
+      color: #3b5998;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .advertisement {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Civil Service Exam Practice Test</h1>
+<p><strong>Created by:</strong> CSE Learning Essentials</p>
+<p><strong>Section 1:</strong> Verbal Ability - Part 1: Word Meaning</p>
+<p><strong>Passing Score:</strong> 8/10</p>
+<p><em>Direction:</em> Choose the meaning of the highlighted word based on the context.</p>
+
+<form id="quizForm">
+  <script>
+    const questions = [
+      {
+        text: "1. After the intense workout, he felt completely ENERVATED and could barely lift his arms.",
+        options: [
+          "A) invigorated",
+          "B) weakened",
+          "C) refreshed",
+          "D) energized",
+          "E) motivated"
+        ],
+        correct: "B"
+      },
+      {
+        text: "2. The politician's EQUIVOCAL response to the question left the audience uncertain about his stance on the issue.",
+        options: [
+          "A) clear",
+          "B) vague",
+          "C) forceful",
+          "D) biased",
+          "E) supportive"
+        ],
+        correct: "B"
+      },
+      {
+        text: "3. The hotel's EXORBITANT prices for basic amenities such as Wi-Fi and parking left many guests feeling frustrated and seeking alternative accommodations.",
+        options: [
+          "A) inflated",
+          "B) reasonable",
+          "C) hidden",
+          "D) discounted",
+          "E) fixed"
+        ],
+        correct: "A"
+      },
+      {
+        text: "4. The scientist’s theory was met with DERISION by the academic community, who found his claims unsubstantiated and overly speculative.",
+        options: [
+          "A) respect",
+          "B) confusion",
+          "C) laughter",
+          "D) scorn",
+          "E) interest"
+        ],
+        correct: "D"
+      },
+      {
+        text: "5. Her ALACRITY in volunteering for the difficult task impressed the entire team.",
+        options: [
+          "A) forward",
+          "B) resistance",
+          "C) desire",
+          "D) foresight",
+          "E) enthusiasm"
+        ],
+        correct: "E"
+      },
+      {
+        text: "6. Despite his best efforts, the HAPLESS detective struggled to solve the complex case, facing one obstacle after another.",
+        options: [
+          "A) experienced",
+          "B) unlucky",
+          "C) clever",
+          "D) patient",
+          "E) suspicious"
+        ],
+        correct: "B"
+      },
+      {
+        text: "7. Before making any major decisions, it's important to HEED the advice of experienced professionals in the field.",
+        options: [
+          "A) follow",
+          "B) ignore",
+          "C) question",
+          "D) analyze",
+          "E) reject"
+        ],
+        correct: "A"
+      },
+      {
+        text: "8. The speaker’s attempt to MOLLIFY the angry crowd with vague promises did little to ease their frustration.",
+        options: [
+          "A) provoke",
+          "B) silence",
+          "C) deceive",
+          "D) pacify",
+          "E) distract"
+        ],
+        correct: "D"
+      },
+      {
+        text: "9. The city streets were filled with a CACOPHONY of honking horns, shouting pedestrians, and blaring sirens, creating a chaotic and unpleasant atmosphere.",
+        options: [
+          "A) silence",
+          "B) rhythm",
+          "C) melody",
+          "D) noise",
+          "E) harmony"
+        ],
+        correct: "D"
+      },
+      {
+        text: "10. Her speech was full of TAUTOLOGY, as she repeatedly emphasized the same points using different words.",
+        options: [
+          "A) clarity",
+          "B) contradiction",
+          "C) repetition",
+          "D) persuasion",
+          "E) confusion"
+        ],
+        correct: "C"
+      }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById("quizForm");
+      questions.forEach((q, index) => {
+        const div = document.createElement("div");
+        div.classList.add("question");
+
+        const p = document.createElement("p");
+        p.innerHTML = `<strong>${q.text}</strong>`;
+        div.appendChild(p);
+
+        const ul = document.createElement("ul");
+        ul.classList.add("choices");
+
+        q.options.forEach((opt, i) => {
+          const li = document.createElement("li");
+          const letter = opt.charAt(0);
+          li.innerHTML = `<input type="radio" name="q${index+1}" value="${letter}"> ${opt}`;
+          ul.appendChild(li);
+        });
+
+        const exp = document.createElement("p");
+        exp.id = `explanation${index+1}`;
+
+        div.appendChild(ul);
+        div.appendChild(exp);
+        form.insertBefore(div, form.lastElementChild);
+      });
+
+      const submitBtn = document.createElement("button");
+      submitBtn.type = "button";
+      submitBtn.textContent = "Submit";
+      submitBtn.onclick = checkAnswers;
+      form.appendChild(submitBtn);
+    });
+
+    function checkAnswers() {
+      let score = 0;
+      let result = document.getElementById("result");
+      result.innerHTML = "";
+
+      questions.forEach((q, index) => {
+        const name = `q${index+1}`;
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        const correct = q.correct;
+        const explanation = document.getElementById(`explanation${index+1}`);
+
+        if (selected && selected.value === correct) {
+          score++;
+        }
+
+        explanation.innerHTML = `<span class="correct-answer">Correct Answer: ${correct}</span>`;
+      });
+
+      result.innerHTML = score >= 8
+        ? `You passed! Your score is: ${score}/10`
+        : `You failed. Your score is: ${score}/10`;
+      result.style.color = score >= 8 ? "green" : "red";
+    }
+  </script>
+</form>
+
+<div id="result" class="result"></div>
+
+<div class="social-link">
+  <p>Follow us on <a href="https://www.facebook.com/cselearningessentials/" target="_blank">Facebook</a> for more updates!</p>
+  <p>Subscribe to our YouTube Channel <a href="https://www.youtube.com/@cselearningessentialsph2023" target="_blank">here</a> for more content!</p>
+</div>
+
+<div class="advertisement">
+  <p>Avail our latest Civil Service Exam Reviewer E-book. Direct message us for more details!</p>
+</div>
+
+</body>
+</html>
